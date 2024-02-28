@@ -21,24 +21,28 @@ jobs:
       
     - name: Test
       run: npm test
-      
+    
+    - name: Install latest npm
+      run: npm install -g npm@latest
+
     - name: Snyk Security Check
       run: npx snyk test --org= anna.bawor 
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
     - name: Send Failure Email
-    if: failure()
-    uses: dawidd6/action-send-mail@v2
-    with:
-    server_address: smtp.gmail.com
-    server_port: 465
-    username: ${{secrets.EMAIL_USERNAME}}
-    password: ${{secrets.EMAIL_PASSWORD}}
-    subject: Snyk Security Issue Detected
-    body: Security issues found in the project. Please check the GitHub Actions log for more details.
-    to: anna.bawor@docc.techstarter.de
-    from: GitHub Actions
+   
+    # if': failure()
+    #uses: dawidd6/action-send-mail@v2
+    #with:
+    #server_address: smtp.gmail.com
+    #server_port: 465
+    #username: ${{secrets.EMAIL_USERNAME}}
+    #password: ${{secrets.EMAIL_PASSWORD}}
+    #subject: Snyk Security Issue Detected
+    #body: Security issues found in the project. Please check the GitHub Actions log for more details.
+    #to: anna.bawor@docc.techstarter.de
+    #from: GitHub Actions 
 
 
 
